@@ -1,28 +1,25 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
 {% block content %}
-  {% for task in tasks_to_do %} 
-    {{ task.task_title }} <br />
-    {{ task.category_title }} <br />
-    {{ task.task_info }} <br />
-    {{ task.is_critical }} <br />
-    {{ task.deadline }} <br />
-  {% endfor %}
-
   <ul class="collapsible">
-    <li>
-      <div class="collapsible-header white-text lime darken-4 text-shadow"><i class="fas fa-caret-down"></i></div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header white-text lime darken-4 text-shadow"><i class="fas fa-caret-down"></i></div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
-    <li>
-      <div class="collapsible-header white-text lime darken-4 text-shadow">
-        <i class="fas fa-caret-down"></i>
-      </div>
-      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
-    </li>
+    {% for task in tasks_to_do %}
+      <li>
+        <div class="collapsible-header white-text lime darken-4 text-shadow">
+          <i class="fas fa-caret-down"></i>
+          <strong>{{ task.task_title }}</strong> : {{ task.deadline }} {% if
+          task.is_critical == "on" %}
+          <i
+            class="fas fa-exclamation-circle text-lighten-2 tooltipped"
+            data-position="right"
+            data-tooltip="CRITICAL!"
+          ></i>
+          {% endif %}
+        </div>
+        <div class="collapsible-body">
+          <strong>{{ task.category_title }}</strong>
+          <p>{{ task.task_info }}</p>
+        </div>
+      </li>
+    {% endfor %}
   </ul>
 {% endblock %}
