@@ -57,7 +57,7 @@ def register():
 def login():
     if request.method == "POST":
         # check if username on form already exists in mongodb
-        existing_user = mongo.db.users.find_one(
+        existing_user = mongo.db.documented_users.find_one(
             {"username": request.form.get("username").lower()})
 
         if existing_user:
