@@ -1,15 +1,28 @@
 {% extends "base.html" %}
 
 {% block content %}
-
-  <h2>I'm extending the base template</h2>
-
-  {% for task in tasks_to_do %}
-    {{ task.task_title }} <br>
-    {{ task.category_title }} <br>
-    {{ task.task_info }} <br>
-    {{ task.is_critical }} <br>
-    {{ task.deadline }} <br>
+  {% for task in tasks_to_do %} 
+    {{ task.task_title }} <br />
+    {{ task.category_title }} <br />
+    {{ task.task_info }} <br />
+    {{ task.is_critical }} <br />
+    {{ task.deadline }} <br />
   {% endfor %}
 
+  <ul class="collapsible">
+    <li>
+      <div class="collapsible-header white-text lime darken-4 text-shadow"><i class="fas fa-caret-down"></i></div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header white-text lime darken-4 text-shadow"><i class="fas fa-caret-down"></i></div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+    <li>
+      <div class="collapsible-header white-text lime darken-4 text-shadow">
+        <i class="fas fa-caret-down"></i>
+      </div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+  </ul>
 {% endblock %}
