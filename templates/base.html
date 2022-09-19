@@ -4,11 +4,46 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Manager</title>
+    <!-- font awesome -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/bfcbb8f6a3.js"
+      crossorigin="anonymous"
+    ></script>
+    <!-- jQuery (minified version needed by materialize) -->
+    <script
+      defer
+      src="https://code.jquery.com/jquery-3.6.1.min.js"
+      integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+      crossorigin="anonymous"
+    ></script>
+    <!-- Compiled and minified CSS (materialize) -->
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <!-- Compiled and minified JavaScript (materialize) -->
+    <script
+      defer
+      src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+    ></script>
+
+    <!-- custom links (must be last to load) -->
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='./assets/styles/styles.css') }}"
+    />
+    <script
+      src="{{ url_for('static', filename='./assets/scripts/scripts.js') }}"
+      defer
+    ></script>
+    {% block styles %} {% endblock styles %} {% block scripts %} {% endblock
+    scripts %}
+    <title>Task Manager 2</title>
   </head>
   <body>
     <h1>I'm part of the base template</h1>
-    {% block content %}
-    {% endblock %}
+    {% block content %}{% endblock %}
   </body>
 </html>

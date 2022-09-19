@@ -27,7 +27,11 @@ def get_tasks():
     return render_template("tasks.html", tasks_to_do=tasks_to_do)
 
 
-if __name__ == "__main__":
-    app.run(host=os.environ.get("IP"),
-            port=int(os.environ.get("PORT")),
-            debug=True)  # change to 'False' before submitting/finishing project
+# if __name__ == "__main__":
+#     app.run(host=os.environ.get("IP"),
+#             port=int(os.environ.get("PORT")),
+#             debug=True)  # change to 'False' before submitting/finishing project
+
+# ignored in testing
+if __name__ == "__main__":  # pragma: no cover
+    app.run(debug=True)
