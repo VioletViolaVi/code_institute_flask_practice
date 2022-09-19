@@ -78,20 +78,27 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/profile/<string:username>", methods=["GET", "POST"])
+@app.route("/profile/<username>", methods=["GET", "POST"])
 def profile():
     # grab current session user's username from mongodb
     username = mongo.db.documented_users.find_one(
         {"username": session["user"]})["username"]
-    return render_template("profile.html", username=username)
+
+    if session["user"]:
+        return render_template("profile.html", username=username)
+
+    return redirect(url_for("login"))
+
+
+@app.route("/logout")
+def logout():
+    flash("You have logged out!")
+    session.pop("user")
+    # session.clear() ==> another way instead of 'session.pop("user")'
+    return redirect(url_for("login"))
 
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
             debug=True)  # change to 'False' before submitting/finishing project
-
-
-# other option below:
-# if __name__ == "__main__":  # pragma: no cover
-#     app.run(debug=True)
