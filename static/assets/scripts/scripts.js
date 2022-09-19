@@ -1,1 +1,3 @@
-console.log("hello World");
+$(document).ready(function () {
+  $(".sidenav").sidenav({ edge: "right" });
+});
