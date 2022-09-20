@@ -6,13 +6,13 @@
       <li>
         <div class="collapsible-header white-text lime darken-4 text-shadow">
           <i class="fas fa-caret-down"></i>
-          <strong>{{ task.task_title }}</strong> : {{ task.deadline }} {% if
-          task.is_critical == "on" %}
-          <i
-            class="fas fa-exclamation-circle text-lighten-2 tooltipped"
-            data-position="right"
-            data-tooltip="CRITICAL!"
-          ></i>
+          <strong>{{ task.task_title }}</strong> : {{ task.deadline }} 
+          {% if task.is_critical == "on" %}
+            <i
+              class="fas fa-exclamation-circle text-lighten-2 tooltipped"
+              data-position="right"
+              data-tooltip="CRITICAL!"
+            ></i>
           {% endif %}
         </div>
         <div class="collapsible-body">
