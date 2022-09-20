@@ -101,4 +101,4 @@ def logout():
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)  # change to 'False' before submitting/finishing project
+            debug=True)  # change to 'False' before submitting/finishing project
