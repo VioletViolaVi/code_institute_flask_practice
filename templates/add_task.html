@@ -17,7 +17,7 @@
           >
             <option value="" disabled selected>Choose category</option>
             {% for grouping in groupings %}
-            <option value="{{ grouping.category_title }}">
+            <option value="{{- grouping.category_title -}}">
               {{- grouping.category_title -}}
             </option>
             {% endfor %}

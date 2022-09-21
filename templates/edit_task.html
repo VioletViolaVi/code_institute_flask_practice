@@ -22,12 +22,12 @@
             <option value="" disabled>Choose category</option>
             {% for grouping in groupings %} {% if grouping.category_title ==
             task.category_title %}
-            <option value="{{ grouping.category_title -}}" selected>
-              {{- grouping.category_title }}
+            <option value="{{- grouping.category_title -}}" selected>
+              {{- grouping.category_title -}}
             </option>
             {% else %}
-            <option value="{{ grouping.category_title }}">
-              {{ grouping.category_title }}
+            <option value="{{- grouping.category_title -}}">
+              {{- grouping.category_title }}
             </option>
             {% endif %} {% endfor %}
           </select>
@@ -40,7 +40,7 @@
         <div class="input-field col s12">
           <i class="fas fa-pencil-alt prefix lime-text text-darken-4"></i>
           <input
-            value="{{ task.task_title }}"
+            value="{{- task.task_title -}}"
             type="text"
             class="validate"
             minlength="5"
@@ -84,7 +84,7 @@
             required
             id="deadline"
             name="deadline"
-            value="{{ task.deadline }}"
+            value="{{- task.deadline -}}"
           />
           <label for="deadline">Due Date</label>
         </div>

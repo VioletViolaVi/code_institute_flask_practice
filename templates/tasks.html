@@ -15,7 +15,7 @@
           {% endif %}
         </div>
         <div class="col s9">
-          <strong>{{ task.task_title }}</strong> : {{ task.deadline }} {% if
+          <strong>{{- task.task_title -}}</strong> : {{- task.deadline -}} {% if
           task.is_critical == "on" %}
           <i
             class="fas fa-exclamation-circle text-lighten-2 tooltipped"
@@ -26,9 +26,9 @@
         </div>
       </div>
       <div class="collapsible-body">
-        <strong>{{ task.category_title }}</strong>
-        <p>{{ task.task_info }}</p>
-        <p><em>Created By: {{ task.created_by }}</em></p>
+        <strong>{{- task.category_title -}}</strong>
+        <p>{{- task.task_info -}}</p>
+        <p><em>Created By: {{- task.created_by -}}</em></p>
       </div>
     </li>
     {% endfor %}
