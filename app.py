@@ -130,13 +130,21 @@ def edit_task(task_id):
             "is_critical": is_critical,
             "created_by": session["user"]
         }
-        mongo.db.tasks_to_do.replace_one({"_id": ObjectId(task_id)}, submit, True)
+        mongo.db.tasks_to_do.replace_one(
+            {"_id": ObjectId(task_id)}, submit, True)
         flash("Task Successfully Updated")
 
     task = mongo.db.tasks_to_do.find_one({"_id": ObjectId(task_id)})
 
     groupings = mongo.db.groupings.find().sort("category_title", 1)
     return render_template("edit_task.html", task=task, groupings=groupings)
+
+
+@app.route("/delete_task/<task_id>")
+def delete_task(task_id):
+    mongo.db.tasks_to_do.deleteOne({"_id": ObjectId(task_id)}) # is not working...
+    flash("Task Successfully Deleted")
+    return redirect(url_for("get_tasks"))
 
 
 if __name__ == "__main__":
