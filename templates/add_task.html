@@ -2,7 +2,8 @@
 <h3 class="lime-text text-darken-4 center-align">Add Task</h3>
 
 <div class="row card-panel grey lighten-5">
-  <form class="col s12" method="POST" action="">
+  <form class="col s12" method="POST" action="{{url_for('add_task')}}">
+    <!-- category selection -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-folder-open prefix lime-text text-darken-4"></i>
@@ -14,15 +15,16 @@
         >
           <option value="" disabled selected>Choose category</option>
           {% for grouping in groupings %}
-            <option value="{{ grouping.category_title }}">
-              {{ grouping.category_title }}
-            </option>
+          <option value="{{ grouping.category_title }}">
+            {{ grouping.category_title }}
+          </option>
           {% endfor %}
         </select>
         <label for="category_title">Task Category</label>
       </div>
     </div>
 
+    <!-- task name -->
     <div class="row">
       <div class="input-field col s12">
         <i class="fas fa-pencil-alt prefix lime-text text-darken-4"></i>
@@ -54,6 +56,7 @@
       </div>
     </div>
 
+    <!-- date picker -->
     <div class="row">
       <div class="input-field col s12">
         <i
@@ -70,6 +73,7 @@
       </div>
     </div>
 
+    <!-- is critical -->
     <div class="row">
       <div class="input-field col s12">
         <div class="switch">
@@ -82,6 +86,16 @@
             Is Critical
           </label>
         </div>
+      </div>
+    </div>
+
+    <!-- submit btn -->
+    <div class="row">
+      <div class="row col s12 center-align">
+        <button type="submit" class="btn-large lime darken-1 text-shadow">
+          Add Task
+          <i class="fas fa-plus-square right"></i>
+        </button>
       </div>
     </div>
   </form>

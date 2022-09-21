@@ -2,7 +2,6 @@ import os
 from flask import Flask, flash, render_template, redirect, request, session, url_for
 from flask_cors import CORS
 from flask_pymongo import PyMongo
-from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 
 if os.path.exists("env.py"):
@@ -98,8 +97,22 @@ def logout():
     return redirect(url_for("login"))
 
 
-@app.route("/add_task")
+@app.route("/add_task", methods=["GET", "POST"])
 def add_task():
+    if request.method == "POST":
+        is_critical = "on" if request.form.get("is_critical") else "off"
+        task = {
+            "category_title": request.form.get("category_title"),
+            "task_title": request.form.get("task_title"),
+            "task_info": request.form.get("task_info"),
+            "deadline": request.form.get("deadline"),
+            "is_critical": is_critical,
+            "created_by": session["user"]
+        }
+        mongo.db.tasks_to_do.insert_one(task)  # needs checking...
+        flash("Task Successfully Added")
+        return redirect(url_for("get_tasks"))
+
     groupings = mongo.db.groupings.find().sort("category_title", 1)
     return render_template("add_task.html", groupings=groupings)
 
