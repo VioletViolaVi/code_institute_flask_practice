@@ -2,6 +2,7 @@ import os
 from flask import Flask, flash, render_template, redirect, request, session, url_for
 from flask_cors import CORS
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
 
 if os.path.exists("env.py"):
@@ -115,6 +116,14 @@ def add_task():
 
     groupings = mongo.db.groupings.find().sort("category_title", 1)
     return render_template("add_task.html", groupings=groupings)
+
+
+@app.route("/edit_task/<task_id>", methods=["GET", "POST"])
+def edit_task(task_id):
+    task = mongo.db.tasks_to_do.find_one({"_id": ObjectId(task_id)})
+
+    groupings = mongo.db.groupings.find().sort("category_title", 1)
+    return render_template("edit_task.html", task=task, groupings=groupings)
 
 
 if __name__ == "__main__":

@@ -1,10 +1,14 @@
 {% extends "base.html" %} 
 
 {% block content %}
-  <h3 class="lime-text text-darken-4 center-align">Add Task</h3>
+  <h3 class="lime-text text-darken-4 center-align">Edit Task</h3>
 
   <div class="row card-panel grey lighten-5">
-    <form class="col s12" method="POST" action="{{url_for('add_task')}}">
+    <form
+      class="col s12"
+      method="POST"
+      action="{{url_for('edit_task', task_id=task._id)}}"
+    >
       <!-- category selection -->
       <div class="row">
         <div class="input-field col s12">
@@ -15,12 +19,17 @@
             class="validate"
             required
           >
-            <option value="" disabled selected>Choose category</option>
-            {% for grouping in groupings %}
-            <option value="{{ grouping.category_title }}">
-              {{- grouping.category_title -}}
+            <option value="" disabled>Choose category</option>
+            {% for grouping in groupings %} {% if grouping.category_title ==
+            task.category_title %}
+            <option value="{{ grouping.category_title -}}" selected>
+              {{- grouping.category_title }}
             </option>
-            {% endfor %}
+            {% else %}
+            <option value="{{ grouping.category_title }}">
+              {{ grouping.category_title }}
+            </option>
+            {% endif %} {% endfor %}
           </select>
           <label for="category_title">Task Category</label>
         </div>
@@ -31,6 +40,7 @@
         <div class="input-field col s12">
           <i class="fas fa-pencil-alt prefix lime-text text-darken-4"></i>
           <input
+            value="{{ task.task_title }}"
             type="text"
             class="validate"
             minlength="5"
@@ -54,7 +64,10 @@
             maxlength="200"
             id="task_info"
             name="task_info"
-          ></textarea>
+          >
+              {{- task.task_info -}}
+              </textarea
+          >
           <label for="task_info">Task Description</label>
         </div>
       </div>
@@ -71,6 +84,7 @@
             required
             id="deadline"
             name="deadline"
+            value="{{ task.deadline }}"
           />
           <label for="deadline">Due Date</label>
         </div>
@@ -84,8 +98,17 @@
               class="fas fa-exclamation-circle prefix lime-text text-darken-4"
             ></i>
             <label for="is_critical">
-              <input type="checkbox" id="is_critical" name="is_critical" />
-              <span class="lever"></span>
+              {% if task.is_critical == "on" %}
+                <input
+                  type="checkbox"
+                  id="is_critical"
+                  name="is_critical"
+                  checked
+                />
+              {% else %}
+                <input type="checkbox" id="is_critical" name="is_critical" />
+              {% endif %}
+                <span class="lever"></span>
               Is Critical
             </label>
           </div>
@@ -95,9 +118,13 @@
       <!-- submit btn -->
       <div class="row">
         <div class="row col s12 center-align">
+          <!-- cancel btn -->
+          <a href="{{ url_for('get_tasks') }}" class="btn-large red text-shadow">
+            Cancel <i class="fas fa-times-circle right"></i>
+          </a>
           <button type="submit" class="btn-large lime darken-1 text-shadow">
-            Add Task
-            <i class="fas fa-plus-square right"></i>
+            Edit Task
+            <i class="fas fa-edit right"></i>
           </button>
         </div>
       </div>
