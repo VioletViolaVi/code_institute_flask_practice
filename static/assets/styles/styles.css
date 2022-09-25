@@ -24,3 +24,24 @@ body {
   margin: 5px;
   line-height: 42px;
 }
+
+/* highlight.js */
+/* .hljs {
+  background: rgba(244, 244, 247, 0.821);
+}
+
+.hljs-attribute,
+.hljs-doctag,
+.hljs-keyword,
+.hljs-meta .hljs-keyword,
+.hljs-name,
+.hljs-selector-tag {
+  color: blue;
+}
+
+.hljs-addition,
+.hljs-built_in,
+.hljs-bullet,
+.hljs-code {
+  color: rgb(197, 197, 38);
+} */
