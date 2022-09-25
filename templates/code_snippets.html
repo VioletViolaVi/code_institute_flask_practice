@@ -4,20 +4,23 @@
   <div class="row center-align">
     <h3 class="card-panel lime-text text-darken-4">Code Snippets</h3>
 
-    <!-- for python -->
-    <div class="col s6">
-      <h4>Python</h4>
+    <!-- btn to open modal -->
+    <div class="col s12">
+      <button
+        data-target="modal1"
+        class="modal-trigger btn btn-large lime darken-3 text-shadow"
+      >
+        Add Code
+        <i class="fas fa-plus-square right"></i>
+      </button>
+    </div>
+
+    <!-- for both -->
+    <div class="col s12">
+      <h4>Python & JavaScript</h4>
 
       <!-- entire modal -->
       <div class="row">
-        <!-- btn to open modal -->
-        <button
-          data-target="modal1"
-          class="modal-trigger btn btn-large lime darken-3 text-shadow"
-        >
-          Add Python Code
-          <i class="fas fa-plus-square right"></i>
-        </button>
 
         <!-- modal contents -->
         <div id="modal1" class="modal">
@@ -26,20 +29,30 @@
             <form
               class="col s12 left-align"
               method="POST"
-              action="{{url_for('added_python_code_func')}}"
+              action="{{url_for('added_code_func')}}"
             >
-              <div class="row">
-                <label for="addedPythonCode">Enter your Python code here</label>
-                <textarea
-                  required
-                  id="addedPythonCode"
-                  name="addedPythonCode"
-                  class="materialize-textarea"
-                ></textarea>
-              </div>
+              <div class="input-field col s12">
+                <select
+                  id="language"
+                  name="language"
+                  class="validate"
+                  required>
+                  <option value="" disabled selected>Choose your language</option>
+                  <option value="1">Python</option>
+                  <option value="2">JavaScript</option>
+                </select>
+              </div>              
+                
+              <label for="addedCode">Enter your code here</label>
+              <textarea
+                required
+                id="addedCode"
+                name="addedCode"
+                class="materialize-textarea"
+              ></textarea>              
 
               <div class="modal-footer">
-                <button type="submit" class="btn-small lime darken-3 text-shadow">
+                <button class="btn-small lime darken-3 text-shadow">
                   Submit
                 </button>
               </div>
@@ -51,70 +64,25 @@
       <!-- using prism.js -->
       {% for code_snippet in code_snippet_func %} 
         {% if code_snippet.language == "python" %}
-        <pre>
-          <code class="language-python">
+          <p>{{-code_snippet.language-}}</p>
+          <pre>
+            <code class="language-python">
 {{code_snippet.code -}}
-          </code>
-        </pre>
+            </code>
+          </pre>
+
+        {% elif code_snippet.language == "javascript" %}
+          <p>{{-code_snippet.language-}}</p>
+          <pre>
+            <code class="language-javascript">
+{{code_snippet.code -}}
+            </code>
+          </pre>        
         {% endif %} 
       {% endfor %}
     </div>
 
-    <!-- for javascript -->
-    <div class="col s6">
-      <h4>JavaScript</h4>
 
-      <!-- entire modal -->
-      <div class="row">
-        <!-- btn to open modal -->
-        <button
-          data-target="modal1"
-          class="modal-trigger btn btn-large lime darken-3 text-shadow"
-        >
-          Add JavaScript Code
-          <i class="fas fa-plus-square right"></i>
-        </button>
-
-        <!-- modal contents -->
-        <div id="modal1" class="modal">
-          <div class="modal-content">
-            <!-- form in modal -->
-            <form
-              class="col s12 left-align"
-              method="POST"
-              action="{{url_for('added_javascript_code_func')}}"
-            >
-              <div class="row">
-                <label for="addedJavaScriptCode">Enter your JavaScript code here</label>
-                <textarea
-                  required
-                  id="addedJavaScriptCode"
-                  name="addedJavaScriptCode"
-                  class="materialize-textarea"
-                ></textarea>
-              </div>
-
-              <div class="modal-footer">
-                <button type="submit" class="btn-small lime darken-3 text-shadow">
-                  Submit
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-
-      <!-- using prism.js -->
-      {% for code_snippet in code_snippet_func %} 
-        {% if code_snippet.language == "javascript" %}
-        <pre>
-          <code class="language-javascript">
-{{code_snippet.code -}}
-          </code>
-        </pre>
-        {% endif %} 
-      {% endfor %}
-    </div>
 
   </div>
 {% endblock %}

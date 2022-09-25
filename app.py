@@ -25,35 +25,66 @@ def code_snippet_func():
     code_snippets = mongo.db.code_snippets.find()
     return render_template("code_snippets.html", code_snippet_func=code_snippets)
 
-
 @app.route("/code_snippet", methods=["GET", "POST"])
-def added_python_code_func():
+def added_code_func():
     if request.method == "POST":
-        added_code = {
-            "language": "python",
-            "code": request.form.get("addedPythonCode"),
-        }
-        mongo.db.code_snippets.insert_one(added_code)
-        flash("Python code Successfully Added")
+        print("(python) request.form.get(\"language\")==> ", request.form.get("language"))
+        print("(javascript) request.form.get(\"language\")==> ", request.form.get("language"))
+
+        # for python
+        if request.form.get("language") == "python":
+            print("(python) request.form.get(\"language\")==> ", request.form.get("language"))
+            added_code = {
+                "language": request.form.get("language"),
+                "code": request.form.get("addedCode"),
+            }
+            mongo.db.code_snippets.insert_one(added_code)
+            flash("Python code Successfully Added")
+
+        # for javascript        
+        elif request.form.get("language") == "javascript":
+            print("(javascript) request.form.get(\"language\")==> ", request.form.get("language"))
+            if request.form.get("language") == "javascript":
+                added_code = {
+                    "language": request.form.get("language"),
+                    "code": request.form.get("addedCode"),
+                }
+            mongo.db.code_snippets.insert_one(added_code)
+            flash("JavaScript code Successfully Added")
     else:
-        flash("Python code was not submitted!")
+        flash("Code did not get added")
 
-    return redirect(url_for("code_snippet_func"))
+    return redirect(url_for("code_snippet_func"))    
 
 
-@app.route("/code_snippet", methods=["GET", "POST"])
-def added_javascript_code_func():
-    if request.method == "POST":
-        added_code = {
-            "language": "javascript",
-            "code": request.form.get("addedJavaScriptCode"),
-        }
-        mongo.db.code_snippets.insert_one(added_code)
-        flash("Javascript code Successfully Added")
-    else:
-        flash("Javascript code was not submitted!")
+# @app.route("/code_snippet", methods=["GET", "POST"])
+# def added_python_code_func():
+    # if request.method == "POST":
+    #     added_code = {
+    #         "language": "python",
+    #         "code": request.form.get("addedPythonCode"),
+    #     }
+    #     mongo.db.code_snippets.insert_one(added_code)
+    #     flash("Python code Successfully Added")
+    # else:
+    #     flash("Python code was not submitted!")
 
-    return redirect(url_for("code_snippet_func"))
+    # return redirect(url_for("code_snippet_func"))
+
+
+# @app.route("/code_snippet", methods=["GET", "POST"])
+# def added_javascript_code_func():
+    # if request.method == "POST":
+    #     added_code = {
+    #         "language": "javascript",
+    #         "code": request.form.get("addedJavaScriptCode"),
+    #     }
+    #     mongo.db.code_snippets.insert_one(added_code)
+    #     flash("Javascript code Successfully Added")
+    # else:
+    #     flash("Javascript code was not submitted!")
+
+    # return redirect(url_for("code_snippet_func"))
 
 
 @app.route("/")
@@ -139,13 +170,13 @@ def logout():
 @app.route("/add_task", methods=["GET", "POST"])
 def add_task():
     if request.method == "POST":
-        is_critical = "on" if request.form.get("is_critical") else "off"
+        # is_critical = "on" if request.form.get("is_critical") else "off"
         task = {
             "category_title": request.form.get("category_title"),
             "task_title": request.form.get("task_title"),
             "task_info": request.form.get("task_info"),
             "deadline": request.form.get("deadline"),
-            "is_critical": is_critical,
+            # "is_critical": is_critical,
             "created_by": session["user"]
         }
         mongo.db.tasks_to_do.insert_one(task)
@@ -159,13 +190,13 @@ def add_task():
 @app.route("/edit_task/<task_id>", methods=["GET", "POST"])
 def edit_task(task_id):
     if request.method == "POST":
-        is_critical = "on" if request.form.get("is_critical") else "off"
+        # is_critical = "on" if request.form.get("is_critical") else "off"
         submit = {
             "category_title": request.form.get("category_title"),
             "task_title": request.form.get("task_title"),
             "task_info": request.form.get("task_info"),
             "deadline": request.form.get("deadline"),
-            "is_critical": is_critical,
+            # "is_critical": is_critical,
             "created_by": session["user"]
         }
         mongo.db.tasks_to_do.replace_one(
