@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  // highlight.js
+  // hljs.highlightAll();
+
   $(".sidenav").sidenav({ edge: "right" });
 
   $(".collapsible").collapsible();
