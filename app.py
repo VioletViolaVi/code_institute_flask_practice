@@ -17,6 +17,12 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+# prism.js
+@app.route("/syntax_highlighting")
+def syntax_highlighting_func():
+    code_snippets = list(mongo.db.syntax_highlighting.find())
+    return render_template("syntax_highlighting.html", syntax_highlighting_func=code_snippets)
+
 
 @app.route("/")
 @app.route("/get_tasks")
