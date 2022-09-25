@@ -17,11 +17,43 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
+
 # prism.js
-@app.route("/syntax_highlighting")
-def syntax_highlighting_func():
-    code_snippets = list(mongo.db.syntax_highlighting.find())
-    return render_template("syntax_highlighting.html", syntax_highlighting_func=code_snippets)
+@app.route("/code_snippet")
+def code_snippet_func():
+
+    code_snippets = mongo.db.code_snippets.find()
+    return render_template("code_snippets.html", code_snippet_func=code_snippets)
+
+
+@app.route("/code_snippet", methods=["GET", "POST"])
+def added_python_code_func():
+    if request.method == "POST":
+        added_code = {
+            "language": "python",
+            "code": request.form.get("addedPythonCode"),
+        }
+        mongo.db.code_snippets.insert_one(added_code)
+        flash("Python code Successfully Added")
+    else:
+        flash("Python code was not submitted!")
+
+    return redirect(url_for("code_snippet_func"))
+
+
+@app.route("/code_snippet", methods=["GET", "POST"])
+def added_javascript_code_func():
+    if request.method == "POST":
+        added_code = {
+            "language": "javascript",
+            "code": request.form.get("addedJavaScriptCode"),
+        }
+        mongo.db.code_snippets.insert_one(added_code)
+        flash("Javascript code Successfully Added")
+    else:
+        flash("Javascript code was not submitted!")
+
+    return redirect(url_for("code_snippet_func"))
 
 
 @app.route("/")
@@ -148,7 +180,8 @@ def edit_task(task_id):
 
 @app.route("/delete_task/<task_id>")
 def delete_task(task_id):
-    mongo.db.tasks_to_do.deleteOne({"_id": ObjectId(task_id)}) # is not working...
+    # is not working...
+    mongo.db.tasks_to_do.deleteOne({"_id": ObjectId(task_id)})
     flash("Task Successfully Deleted")
     return redirect(url_for("get_tasks"))
 
