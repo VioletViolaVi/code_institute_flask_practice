@@ -52,7 +52,7 @@
     ></script>
     {% block styles %} {% endblock styles %} {% block scripts %} {% endblock
     scripts %}
-    <title>Task Manager 2</title>
+    <title>Flask Manager</title>
   </head>
   <body>
     <!-- full navbar -->
@@ -68,8 +68,8 @@
           <!-- for larger screens -->
           <ul class="right hide-on-med-and-down">
             <li>
-              <a href="{{ url_for('syntax_highlighting_func') }}"
-                >Syntax Highlighting</a
+              <a href="{{ url_for('code_snippet_func') }}"
+                >Code Snippets</a
               >
             </li>
             <li><a href="{{ url_for('get_tasks') }}">Home</a></li>
@@ -98,9 +98,7 @@
         </li>
         <li><a href="{{ url_for('get_tasks') }}">Home</a></li>
         <li>
-          <a href="{{ url_for('syntax_highlighting_func') }}"
-            >Syntax Highlighting</a
-          >
+          <a href="{{ url_for('code_snippet_func') }}">Code Snippets</a>
         </li>
 
         {% if session.user %}
